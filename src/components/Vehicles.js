@@ -1,16 +1,15 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import "./Vehicle.css";
 import VehicleCard from "./VehicleCard";
 export default function Vehicles() {
+  const { cars } = useSelector((state) => state.cars);
+  console.log(cars);
   return (
     <div className="vehicles__con">
-      <VehicleCard />
-      <VehicleCard />
-      <VehicleCard />
-      <VehicleCard />
-      <VehicleCard />
-      <VehicleCard />
-      <VehicleCard />
+      {cars.map((car) => (
+        <VehicleCard key={car.id} />
+      ))}
     </div>
   );
 }

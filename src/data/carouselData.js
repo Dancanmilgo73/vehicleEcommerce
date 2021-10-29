@@ -1,4 +1,4 @@
-const imgData = [
+export const imgData = [
   {
     url:
       "https://media.istockphoto.com/photos/car-service-worker-applying-nano-coating-on-a-car-detail-picture-id1273682054?b=1&k=20&m=1273682054&s=170667a&w=0&h=P3O-y_vcH33UxSqVkmJooHLSLQQcKpbS8pDGufVPDzk=",
@@ -15,4 +15,4 @@ const imgData = [
     title: "super cars for ypu",
   },
 ];
-export default imgData;
+export const vehiclesData = [{}, {}, {}, {}, {}, {}, {}, {}, {}];

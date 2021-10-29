@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import imgData from "../data/carouselData";
+import { imgData } from "../data/carouselData";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 

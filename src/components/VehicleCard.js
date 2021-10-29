@@ -8,7 +8,6 @@ export default function VehicleCard() {
   let id = 1;
   return (
     <div className="card__item">
-      {/* TODO: remove styling */}
       <Link
         to={`details/${id}`}
         className="card__img"
