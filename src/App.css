@@ -47,7 +47,7 @@
 .search__con .search__input {
   display: flex;
   align-items: center;
-  width: 30%;
+  width: 100%;
   border: 1px solid grey;
   border-radius: 5px !important;
   padding: 8px 0.5rem 8px 0.5rem;

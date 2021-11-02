@@ -4,6 +4,7 @@ import Search from "./components/Search";
 import Vehicles from "./components/Vehicles";
 import Cart from "./components/Cart";
 import Details from "./components/Details";
+import CartContents from "./components/CartContents";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
@@ -15,12 +16,15 @@ function App() {
           <Route path="/details/:id">
             <Details />
           </Route>
-          <Route path="/">
+          <Route path="/" exact>
             <div className="main">
               <Carousel />
               <Search />
               <Vehicles />
             </div>
+          </Route>
+          <Route path="/cart">
+            <CartContents />
           </Route>
         </Switch>
       </Router>

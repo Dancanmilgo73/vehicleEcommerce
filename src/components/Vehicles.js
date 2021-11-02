@@ -8,7 +8,7 @@ export default function Vehicles() {
   return (
     <div className="vehicles__con">
       {cars.map((car) => (
-        <VehicleCard key={car.id} />
+        <VehicleCard key={car.id} car={car} />
       ))}
     </div>
   );

@@ -1,38 +1,50 @@
 import React, { useState } from "react";
 import "./VehicleCard.css";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addCarToCart, incrementQuantity } from "../redux/actions/cars.actions";
 
-export default function VehicleCard() {
-  const [quantity, setQuantity] = useState(false);
-  const [inputVal, setInputVal] = useState(1);
-  let id = 1;
+export default function VehicleCard({ car }) {
+  const { carsInCart } = useSelector((state) => state.cars);
+
+  // console.log(carsInCart);
+
+  const dispatch = useDispatch();
+  // const [quantity, setQuantity] = useState(false);
+  // const [inputVal, setInputVal] = useState(1);
+  const isCarInCart = carsInCart.find((carInCart) => carInCart.id === car.id);
+  // const isCarInCart = carsInCart.some((carInCart) => carInCart.id === car.id);
+  console.log(isCarInCart);
+
   return (
     <div className="card__item">
       <Link
-        to={`details/${id}`}
+        to={`details/${car.id}`}
         className="card__img"
         style={{ decoration: "none" }}
       >
-        <img
-          alt="avatar"
-          src="https://images.unsplash.com/photo-1540066019607-e5f69323a8dc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YXVkaXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-        />
+        <img alt="avatar" src={car.image} />
       </Link>
-      <span>Audi</span>
-      <span>Milage: 0</span>
-      <span>2020</span>
-      <span>Ksh 3m</span>
+      <span>{car.name}</span>
+      <span>{car.model}</span>
+      <span>{car.horse_power}</span>
+      <span>Ksh{car.price}</span>
 
-      {quantity ? (
+      {isCarInCart ? (
         <div className="card__inputQuantity">
-          <button onClick={() => inputVal > 1 && setInputVal(inputVal - 1)}>
+          <button /* onClick={() => dispatch(addCarToCart(car.id))} */>
             -
           </button>
-          {inputVal}
-          <button onClick={() => setInputVal(inputVal + 1)}>+</button>
+          {isCarInCart.quantity}
+          <button onClick={() => dispatch(incrementQuantity(isCarInCart.id))}>
+            +
+          </button>
         </div>
       ) : (
-        <button className="btn__addtocart" onClick={() => setQuantity(true)}>
+        <button
+          className="btn__addtocart"
+          onClick={() => dispatch(addCarToCart(car.id))}
+        >
           Add to Cart
         </button>
       )}
