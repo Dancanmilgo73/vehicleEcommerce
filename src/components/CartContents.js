@@ -1,8 +1,12 @@
 import * as React from "react";
 import "./CartContent.css";
 import { useSelector, useDispatch } from "react-redux";
-import { removeItem } from "../redux/actions/cars.actions";
-
+import {
+  removeItem,
+  incrementQuantity,
+  decrementQuantity,
+} from "../redux/actions/cars.actions";
+import { Link } from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -12,14 +16,20 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 const TAX_RATE = 0.07;
+let subTotal = 0;
 
-function ccyFormat(price, quantity) {
+function getPriceTotal(price, quantity) {
   // return `${num.toFixed(2)}`;
+  let totalWithDisc = 0;
+  if (quantity > 5) {
+    totalWithDisc = price * quantity - price * quantity * 0.05;
 
-  if (quantity > 5)
-    return (price * quantity - price * quantity * 0.05).toFixed(2);
+    return totalWithDisc.toFixed(2);
+  } else {
+    totalWithDisc = price * quantity;
 
-  return (price * quantity).toFixed(2);
+    return totalWithDisc.toFixed(2);
+  }
 }
 
 function getDiscount(price, quantity) {
@@ -36,9 +46,9 @@ function createRow(desc, qty, unit) {
   return { desc, qty, unit, price };
 }
 
-function subtotal(items) {
-  return items.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
-}
+// function subtotal(car) {
+//   return car.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
+// }
 
 // const rows = [
 //   createRow("Paperclips (Box)", 100, 1.15),
@@ -53,7 +63,7 @@ function subtotal(items) {
 export default function CartContent() {
   const { carsInCart } = useSelector((state) => state.cars);
   const dispatch = useDispatch();
-
+  // console.log(subtotal);
   return (
     <TableContainer component={Paper} className="cartContent__Con">
       <Table sx={{ minWidth: 700 }} aria-label="spanning table">
@@ -66,58 +76,63 @@ export default function CartContent() {
           </TableRow>
           <TableRow>
             <TableCell>Vehicle</TableCell>
-            <TableCell align="right">Qty.</TableCell>
-            <TableCell align="right">Price</TableCell>
-            <TableCell align="right">Discount</TableCell>
-            <TableCell align="right">Total</TableCell>
+            <TableCell align="left">Qty.</TableCell>
+            <TableCell align="left">Price</TableCell>
+            <TableCell align="left">Discount</TableCell>
+            <TableCell align="left">Total</TableCell>
+            {/* <TableCell align="leftt">Total</TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
-          {carsInCart.map((car) => (
-            <TableRow key={car.id}>
-              <TableCell className="name__image">
-                <span>{car.name}</span>
-                <span className="car__image">
-                  {<img src={car.image} alt="avatar" />}
-                </span>
-              </TableCell>
-              <TableCell align="right">{car.quantity}</TableCell>
-              <TableCell align="right">{car.price}</TableCell>
-              <TableCell align="right">
-                {getDiscount(Number(car.price), Number(car.quantity))}
-              </TableCell>
-              <TableCell align="right">
-                {ccyFormat(Number(car.price), Number(car.quantity))}
-                {/* {car.price} */}
-              </TableCell>
-              <TableCell align="right">
-                <button onClick={() => dispatch(removeItem(car.id))}>
-                  Remove
+          {carsInCart.map((car) => {
+            subTotal += Number(
+              getPriceTotal(Number(car.price), Number(car.quantity))
+            );
+            const quantity = (
+              <div className="card__inputQuantity">
+                <button onClick={() => dispatch(decrementQuantity(car.id))}>
+                  -
                 </button>
-              </TableCell>
-            </TableRow>
-          ))}
+                {car.quantity}
+                <button onClick={() => dispatch(incrementQuantity(car.id))}>
+                  +
+                </button>
+              </div>
+            );
+            return (
+              <TableRow key={car.id}>
+                <TableCell align="left">
+                  <Link className="name__image" to={`details/${car.id}`}>
+                    <span>{car.name}</span>
+                    <span className="car__image">
+                      {<img src={car.image} alt="avatar" />}
+                    </span>
+                  </Link>
+                </TableCell>
+                <TableCell align="left">{quantity}</TableCell>
+                <TableCell align="left">{car.price}</TableCell>
+                <TableCell align="left">
+                  Ksh,{getDiscount(Number(car.price), Number(car.quantity))}
+                </TableCell>
+                <TableCell align="left">
+                  Ksh{getPriceTotal(Number(car.price), Number(car.quantity))}
+                  {/* {car.price} */}
+                </TableCell>
+                <TableCell align="left">
+                  <button onClick={() => dispatch(removeItem(car.id))}>
+                    Remove
+                  </button>
+                </TableCell>
+              </TableRow>
+            );
+          })}
 
           <TableRow>
             <TableCell rowSpan={3} />
-            <TableCell colSpan={2}>Subtotal</TableCell>
-            <TableCell align="right">
-              {ccyFormat(/* invoiceSubtotal */)}
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Tax</TableCell>
-            <TableCell align="right">{`${(TAX_RATE * 100).toFixed(
-              0
-            )} %`}</TableCell>
-            <TableCell align="right">
-              {/* {ccyFormat(invoiceTaxes)} */}
-            </TableCell>
-          </TableRow>
-          <TableRow>
             <TableCell colSpan={2}>Total</TableCell>
             <TableCell align="right">
-              {/* {ccyFormat(invoiceTotal)} */}
+              {/*  {getPriceTotal(invoiceSubtotal)} */}
+              Ksh,{subTotal.toFixed(2)}
             </TableCell>
           </TableRow>
         </TableBody>

@@ -20,7 +20,7 @@ export default function Search() {
           placeholder="Search for car"
           onChange={(e) => setInput(e.target.value)}
         />
-        <Link to={`/search/:${input}`}>
+        <Link to={`/search/${input}`}>
           <SearchIcon
             className="search__button"
             onClick={() => handleSubmit(input)}
