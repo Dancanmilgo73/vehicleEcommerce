@@ -1,6 +1,7 @@
 import * as React from "react";
 import "./CartContent.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { removeItem } from "../redux/actions/cars.actions";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -12,8 +13,18 @@ import Paper from "@mui/material/Paper";
 
 const TAX_RATE = 0.07;
 
-function ccyFormat(num) {
+function ccyFormat(price, quantity) {
   // return `${num.toFixed(2)}`;
+
+  if (quantity > 5)
+    return (price * quantity - price * quantity * 0.05).toFixed(2);
+
+  return (price * quantity).toFixed(2);
+}
+
+function getDiscount(price, quantity) {
+  if (quantity > 5) return (price * quantity * 0.05).toFixed(2);
+  return 0;
 }
 
 function priceRow(qty, unit) {
@@ -41,6 +52,8 @@ function subtotal(items) {
 
 export default function CartContent() {
   const { carsInCart } = useSelector((state) => state.cars);
+  const dispatch = useDispatch();
+
   return (
     <TableContainer component={Paper} className="cartContent__Con">
       <Table sx={{ minWidth: 700 }} aria-label="spanning table">
@@ -70,12 +83,18 @@ export default function CartContent() {
               </TableCell>
               <TableCell align="right">{car.quantity}</TableCell>
               <TableCell align="right">{car.price}</TableCell>
-              <TableCell align="right">0</TableCell>
               <TableCell align="right">
-                {/* {ccyFormat(Number(car.price))} */}
-                {car.price}
+                {getDiscount(Number(car.price), Number(car.quantity))}
               </TableCell>
-              <TableCell align="right">Remove</TableCell>
+              <TableCell align="right">
+                {ccyFormat(Number(car.price), Number(car.quantity))}
+                {/* {car.price} */}
+              </TableCell>
+              <TableCell align="right">
+                <button onClick={() => dispatch(removeItem(car.id))}>
+                  Remove
+                </button>
+              </TableCell>
             </TableRow>
           ))}
 

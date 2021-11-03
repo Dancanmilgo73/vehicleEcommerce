@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import "./VehicleCard.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addCarToCart, incrementQuantity } from "../redux/actions/cars.actions";
+import {
+  addCarToCart,
+  incrementQuantity,
+  decrementQuantity,
+} from "../redux/actions/cars.actions";
 
 export default function VehicleCard({ car }) {
   const { carsInCart } = useSelector((state) => state.cars);
@@ -32,7 +36,7 @@ export default function VehicleCard({ car }) {
 
       {isCarInCart ? (
         <div className="card__inputQuantity">
-          <button /* onClick={() => dispatch(addCarToCart(car.id))} */>
+          <button onClick={() => dispatch(decrementQuantity(isCarInCart.id))}>
             -
           </button>
           {isCarInCart.quantity}

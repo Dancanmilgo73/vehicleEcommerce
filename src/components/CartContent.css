@@ -2,7 +2,7 @@
   box-sizing: border-box;
   width: 70% !important;
   margin: 10vh auto auto auto;
-  height: 90vh;
+  min-height: 90vh;
 }
 .name__image {
   /* width: 100%;

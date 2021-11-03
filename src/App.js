@@ -5,7 +5,13 @@ import Vehicles from "./components/Vehicles";
 import Cart from "./components/Cart";
 import Details from "./components/Details";
 import CartContents from "./components/CartContents";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import SearchedCars from "./components/SearchedCars";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
 function App() {
   return (
@@ -25,6 +31,16 @@ function App() {
           </Route>
           <Route path="/cart">
             <CartContents />
+          </Route>
+          <Route path="/search" exact>
+            <Redirect to="/" />
+          </Route>
+          <Route path="/search/:searchval">
+            <div className="main">
+              <Carousel />
+              <Search />
+              <SearchedCars />
+            </div>
           </Route>
         </Switch>
       </Router>

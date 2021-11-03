@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { useDispatch } from "react-redux";
 import { searchCar } from "../redux/actions/cars.actions";
+import { Link } from "react-router-dom";
 
 export default function Search() {
   const dispatch = useDispatch();
@@ -19,10 +20,12 @@ export default function Search() {
           placeholder="Search for car"
           onChange={(e) => setInput(e.target.value)}
         />
-        <SearchIcon
-          className="search__button"
-          onClick={() => handleSubmit(input)}
-        />
+        <Link to={`/search/:${input}`}>
+          <SearchIcon
+            className="search__button"
+            onClick={() => handleSubmit(input)}
+          />
+        </Link>
       </div>
     </div>
   );
