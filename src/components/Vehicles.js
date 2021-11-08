@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import "./Vehicle.css";
+import "../styles/Vehicle.css";
 import VehicleCard from "./VehicleCard";
 export default function Vehicles() {
   const { cars } = useSelector((state) => state.cars);

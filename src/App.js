@@ -1,4 +1,4 @@
-import "./App.css";
+import "./styles/App.css";
 import Carousel from "./components/Carousel";
 import Search from "./components/Search";
 import Vehicles from "./components/Vehicles";
@@ -12,20 +12,22 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import NavBar  from "./components/NavBar";
 
 function App() {
   return (
     <div className="app">
       <Router>
-        <Cart />
+        {/* <Cart /> */}
+        <NavBar />
         <Switch>
           <Route path="/details/:id">
             <Details />
           </Route>
           <Route path="/" exact>
             <div className="main">
+             
               <Carousel />
-              <Search />
               <Vehicles />
             </div>
           </Route>
@@ -37,8 +39,9 @@ function App() {
           </Route>
           <Route path="/search/:searchval">
             <div className="main">
+              {/* <Search /> */}
+              {/* <NavBar /> */}
               <Carousel />
-              <Search />
               <SearchedCars />
             </div>
           </Route>

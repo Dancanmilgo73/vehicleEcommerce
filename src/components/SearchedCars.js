@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import VehicleCard from "./VehicleCard";
-import "./SearchedCars.css";
+import "../styles/SearchedCars.css";
 
 function SearchedCars() {
   const { searchedCars } = useSelector((state) => state.cars);

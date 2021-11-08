@@ -3,6 +3,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useDispatch } from "react-redux";
 import { searchCar } from "../redux/actions/cars.actions";
 import { Link } from "react-router-dom";
+import "../styles/Search.css"
 
 export default function Search() {
   const dispatch = useDispatch();

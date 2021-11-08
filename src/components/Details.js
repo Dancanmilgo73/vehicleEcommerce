@@ -1,5 +1,5 @@
 import React from "react";
-import "./Details.css";
+import "../styles/Details.css";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
