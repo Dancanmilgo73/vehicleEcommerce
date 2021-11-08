@@ -29,18 +29,20 @@
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
 }
-.card__item > span {
+.buttons__con > span {
   padding: 1px;
   font-weight: bold;
   color: rgb(87, 86, 86);
 }
-.card__item > button {
+.buttons__con > button {
   border: none;
   background-color: rgb(240, 240, 51);
   padding: 0.5rem;
   width: 7rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
-.card__item > button:hover {
+.buttons__con > button:hover {
   background-color: rgb(245, 245, 98);
   cursor: pointer;
 }
@@ -62,4 +64,9 @@
 }
 .card__inputQuantity > button:hover {
   cursor: pointer;
+}
+.buttons__con {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }

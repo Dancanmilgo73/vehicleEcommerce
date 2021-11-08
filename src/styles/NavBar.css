@@ -9,3 +9,6 @@
   z-index: 100;
   padding: 2vh;
 }
+.home__link:hover {
+  color: white !important;
+}

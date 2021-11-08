@@ -1,9 +1,9 @@
 export const vehicles = [
   {
     id: 1,
-    name: "Audi",
-    model: "s5",
-    image: "https://tinyurl.com/y4vyh8sy",
+    name: "Tesla",
+    model: "Model 3",
+    image: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dGVzbGF8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
     price: 525000,
     Class: "executive car",
     body_style: "4-door",

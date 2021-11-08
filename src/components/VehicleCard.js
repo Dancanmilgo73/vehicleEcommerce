@@ -33,7 +33,7 @@ export default function VehicleCard({ car }) {
       <span>{car.model}</span>
       <span>{car.horse_power}</span>
       <span>Ksh{car.price}</span>
-
+<div className="buttons__con">
       {isCarInCart ? (
         <div className="card__inputQuantity">
           <button onClick={() => dispatch(decrementQuantity(isCarInCart.id))}>
@@ -52,6 +52,8 @@ export default function VehicleCard({ car }) {
           Add to Cart
         </button>
       )}
+      <button  className="btn__addtocart"><Link   to={`details/${car.id}`} style={{ textDecoration: "none", color: "inherit"}}>View Details</Link></button>
+    </div>
     </div>
   );
 }
