@@ -13,12 +13,13 @@ import {
   Redirect,
 } from "react-router-dom";
 import NavBar  from "./components/NavBar";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <div className="app">
       <Router>
-        {/* <Cart /> */}
+        
         <NavBar />
         <Switch>
           <Route path="/details/:id">
@@ -46,6 +47,7 @@ function App() {
             </div>
           </Route>
         </Switch>
+          <Footer />
       </Router>
     </div>
   );

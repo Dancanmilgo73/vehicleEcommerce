@@ -64,6 +64,9 @@ export default function CartContent() {
   const { carsInCart } = useSelector((state) => state.cars);
   const dispatch = useDispatch();
   // console.log(subtotal);
+  // const removeCar = (id) => {
+  //   dispatch(removeItem(id))
+  // }
   return (
     <TableContainer component={Paper} className="cartContent__Con">
       <Table sx={{ minWidth: 700 }} aria-label="spanning table">
@@ -85,6 +88,10 @@ export default function CartContent() {
         </TableHead>
         <TableBody>
           {carsInCart.map((car) => {
+            // if(car.quantity < 1){
+            //   removeCar(car.id)
+            // }
+            // console.log("hello");
             subTotal += Number(
               getPriceTotal(Number(car.price), Number(car.quantity))
             );

@@ -1,0 +1,15 @@
+.footer {
+  bottom: 0;
+  background-color: hsl(202, 41%, 66%);
+  /* color: white; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 1rem;
+  /* font-family: "Open Sans"; */
+  font-weight: bold;
+  margin-top: 3vh;
+}
+.footer p {
+  padding: 0.5rem;
+}

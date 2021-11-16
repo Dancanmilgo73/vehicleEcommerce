@@ -6,6 +6,7 @@ import {
   addCarToCart,
   incrementQuantity,
   decrementQuantity,
+  removeItem
 } from "../redux/actions/cars.actions";
 
 export default function VehicleCard({ car }) {
@@ -18,7 +19,9 @@ export default function VehicleCard({ car }) {
   // const [inputVal, setInputVal] = useState(1);
   const isCarInCart = carsInCart.find((carInCart) => carInCart.id === car.id);
   // const isCarInCart = carsInCart.some((carInCart) => carInCart.id === car.id);
-  console.log(isCarInCart);
+  // console.log(isCarInCart);
+  if(isCarInCart?.quantity === 0) dispatch(removeItem(isCarInCart.id))
+  // console.log(isCarInCart?.quantity);
 
   return (
     <div className="card__item">
@@ -34,7 +37,7 @@ export default function VehicleCard({ car }) {
       <span>{car.horse_power}</span>
       <span>Ksh{car.price}</span>
 <div className="buttons__con">
-      {isCarInCart ? (
+      {isCarInCart?.quantity ? (
         <div className="card__inputQuantity">
           <button onClick={() => dispatch(decrementQuantity(isCarInCart.id))}>
             -

@@ -8,14 +8,14 @@ import {
   SEARCH__CAR,
 } from "../actionTypes";
 const initialState = {
-  cars: vehicles,
+  cars: [],
   carsInCart: [],
   searchedCars: [],
 };
 export const getCars = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET__CARS:
-      return state;
+      return {...state, cars: [...payload]};
     case ADD__TO__CART:
       let carInCart = state.cars.find((car) => car.id === payload);
       // console.log(carInCart);
@@ -47,7 +47,7 @@ export const getCars = (state = initialState, { type, payload }) => {
         carsInCart: [
           ...state.carsInCart.map((item) =>
             item.id === payload
-              ? { ...item, quantity: item.quantity > 1 && item.quantity - 1 }
+              ? { ...item, quantity: item.quantity - 1 }
               : item
           ),
         ],
@@ -55,8 +55,8 @@ export const getCars = (state = initialState, { type, payload }) => {
     case SEARCH__CAR:
       const serchedCars = state.cars.filter(
         (car) =>
-          car.name.toLowerCase().includes(payload.toLowerCase()) ||
-          car.model.toLowerCase().includes(payload.toLowerCase())
+          car.name?.toLowerCase().includes(payload.toLowerCase()) ||
+          car.model?.toLowerCase().includes(payload.toLowerCase())
       );
       // console.log(serchedCars);
       return { ...state, searchedCars: serchedCars };

@@ -17,11 +17,11 @@ export default function Details() {
         <h3>{car[0].name}</h3>
         <p>{car[0].price}</p>
         <p>{car[0].model}</p>
-        <p>{car[0].Class}</p>
+        <p>{car[0].class}</p>
         <p>{car[0].transmission}</p>
         <p>{car[0].body_style}</p>
-        <p>{car[0].horse__power}</p>
-        <p>{car[0].Accelaration}</p>
+        <p>{car[0].horse_power}</p>
+        <p>{car[0].Acceleration}</p>
       </div>
     </div>
   );
